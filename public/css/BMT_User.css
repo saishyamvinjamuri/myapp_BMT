@@ -1,0 +1,194 @@
+body,main,section,form,footer {
+    display: block;
+}
+
+body{
+    font-family: "Century Gothic";
+    width: 1330px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.logo {
+    color: #555555;
+    font-weight: bold;
+    font-size: xx-large;
+}
+main{
+    /*width: 750px;
+    height: 500px; */
+    width: 1330px;
+    color: #204d74;
+    /*margin-right: 10px;
+    background-color: silver; */
+}
+#home_page_section {
+    margin-top: 70px;
+    margin-bottom: 5px;
+    background: url(../img/HomePage.jpg) 50% 0 repeat-y fixed;
+    background-size: cover;
+    background-position: center;
+    width: 1350px;
+    height: 620px;
+}
+#home_page_section article{
+    padding-left: 40px;
+    padding-top: 130px;
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+}
+/* Book_Section */
+#book_section{
+   /* border: solid;
+    border-color: #204d74; */
+    width: 1350px;
+    height: 700px;
+    background-size: cover;
+    background: url(../img/BMT_bookSection.jpg) 50% 0 repeat-x fixed;
+    background-position: center;
+}
+h1{
+    text-align: center;
+}
+#book_section article {
+    color: #ffffff;
+    font-size: 18px;
+}
+#book_section h1
+{
+    color: #ffffff;
+}
+#book_section .book_section_date
+{
+    color: #ffffff;
+}
+#book_section .book_section_time
+{
+    color: #ffffff;
+}
+#view_section
+{
+    /*border: solid;
+    border-color: #204d74;*/
+    width: 1350px;
+    height: 620px;
+    margin-top: 5px;
+    background: url(../img/viewSection.jpg) 50% 0 repeat-y fixed;
+    background-position: center;
+    background-size: cover;
+}
+#view_section h1,tr,article{
+    color: white;
+    font-size: 18px;
+}
+#view_section h1{
+    font-size: 25px;
+}
+table{
+    width: 500px;
+    margin-left: 100px;
+}
+td,th {
+    border: 1px white;
+    border-collapse: collapse;
+    padding: 5px;
+}
+#contact_section{
+    /*background: url("http://www.blogerin.com/wp-content/uploads/2012/10/Twitter-covers-image-15.jpg"); */
+    width: 1200px;
+    height: 490px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+#contact_section article{
+    margin-top: 150px;
+    color: white;
+}
+#copy_section p{
+    text-orientation: upright;
+    margin-top: 215px;
+    font-size: 20px;
+}
+nav{
+    width: 1350px;
+    display: inline-block;
+    background-color: #ffffff;
+    height: 60px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+.nav_hper{
+    font-weight: bold;
+}
+li {
+    display: inline;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.fix_nav_bar{
+    position: fixed;
+    top:0;
+    z-index: 9999;
+}
+li a{
+    color: #555555;
+    text-decoration: none;
+    font-size: 20px;
+    font-variant: all-small-caps;
+    letter-spacing: 1px;
+    word-spacing: 18px;
+}
+#book_section_form{
+    margin-top: 50px;
+    margin-left: 350px;
+    alignment: center;
+}
+.ip{
+    color: #204d74;
+    font-family: "Century Gothic";
+    height: 30px;
+    border: double;
+    border-color: #269abc;
+}
+.ip_cancel{
+    background-color: red;
+    color: white;
+    font-family: "Century Gothic";
+    height: 30px;
+    border: double;
+    border-color: white;
+}
+section{
+    padding: 10px;
+}
+footer{
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    width: 1330px;
+    height: 600px;
+    background: url(../img/footer.jpg) 50% 0 repeat-y fixed;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
