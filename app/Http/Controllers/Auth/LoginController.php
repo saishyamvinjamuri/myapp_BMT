@@ -24,7 +24,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login. testing 
+     * Where to redirect users after login. testing
      *
      * @var string
      */
@@ -71,7 +71,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($data))
         {
-            return redirect::intended('user');
+            return redirect::intended('home');
         }
         else
         {

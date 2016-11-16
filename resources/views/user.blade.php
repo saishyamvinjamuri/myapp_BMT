@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/BMT_User.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -9,6 +12,11 @@
     <link rel="icon" type="image/gif" href="http://www.smartadtoronto.com/perfect_chair_icon.jpg" />
     <title>BookMyTurn</title>
 
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 
 </head>
 <!-- background="http://www.unomaha.edu/news/2013/12/media/hpervet-h.jpg" -->
@@ -31,12 +39,18 @@
             <li class="nav_hper"><a href="#book_section"> Book </a></li>
             <li class="nav_hper"><a href="#end_book"> View </a></li>
             <li class="nav_hper"><a href="#contact_section"> Contact </a></li>
-            <li class="nav_hper"><a href="BMT_Login.html">Logout</a> </li>
+            <li class="nav_hper"><a href="{{ url('/logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">Logout</a>
+                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </li>
         </ul>
     </nav>
 </header>
 <div id="home_page_section">
     <article>
+        Hi {{ Auth::user()->name }}, <br>
         Play . . Relax .. Repeat !!
     </article>
 </div>
