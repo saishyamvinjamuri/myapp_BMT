@@ -15,10 +15,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Route::get('/user', function () {
-    return view('user');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::resource('books', 'BookController');
