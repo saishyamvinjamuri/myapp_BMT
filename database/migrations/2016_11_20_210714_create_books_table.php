@@ -14,9 +14,11 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->increments('rowid');
-            $table->integer('userId');
-            $table->string('emailId');
+            $table->increments('id');
+            $table->string('email');
+            $table->date('bookedon');
+            $table->time('bookedfrom');
+            $table->time('bookedtill');
             $table->timestamps();
         });
     }
