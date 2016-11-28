@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
     <!-- Scripts -->
     <script>
@@ -19,6 +21,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -35,7 +38,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'BookMyTurn') }}
                     </a>
                 </div>
@@ -53,9 +56,9 @@
                            <!-- <li><a href="{{ url('/login') }}">Login</a></li> -->
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
-                            <li><a href="{{ url('/book') }}">Book</a></li>
-                            <li><a href="{{ url('/book/store') }}">View</a></li>
-                            <li><a href="{{ url('/book/update') }}">Update</a></li>
+                            <li><a href="{{ url('/book/create') }}">Book</a></li>
+                            <li><a href="{{ url('/book/') }}">View</a></li>
+                            <li><a href="{{ url('/book/') }}">Update</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
