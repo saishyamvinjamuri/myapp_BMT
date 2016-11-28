@@ -23,11 +23,4 @@ class RedirectIfAuthenticated
 
         return $next($request);
     }
-    protected function authenticated($request, $user)
-    {
-        if($user->is_admin) {
-            return redirect()->intended('/admin_path_here');
-        }
-        return redirect()->intended('/path_for_normal_user');
-    }
 }
