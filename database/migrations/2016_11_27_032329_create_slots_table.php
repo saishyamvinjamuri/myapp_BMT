@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBookingsTable extends Migration
+class CreateSlotsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateBookingsTable extends Migration
      * @return void
      */
     public function up()
-    {   
-        //table which is used to save slots of users
-        Schema::create('bookings', function (Blueprint $table) {
+    {
+        Schema::create('slots', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->date('bookedon');
             $table->time('bookedfrom');
             $table->time('bookedtill');
@@ -31,6 +30,6 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('slots');
     }
 }
