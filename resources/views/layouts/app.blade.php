@@ -56,9 +56,13 @@
                            <!-- <li><a href="{{ url('/login') }}">Login</a></li> -->
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            @if( Auth::user()->role == 'admin')
+                                <li><a href="{{ url('/book/create') }}">Enable</a></li>
+                                <li><a href="{{ url('/book/create') }}">Disable</a></li>
+                            @endif
                             <li><a href="{{ url('/book/create') }}">Book</a></li>
-                            <li><a href="{{ url('/book/') }}">View</a></li>
-                            <li><a href="{{ url('/book/') }}">Update</a></li>
+                            <li><a href="{{ url('/book') }}">View</a></li> <!--this is redirecting to index page -->
+                            <li><a href="{{ url('/book') }}">Update</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
