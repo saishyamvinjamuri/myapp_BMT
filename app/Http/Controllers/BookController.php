@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Slot;
+use App\User;
 use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
@@ -34,11 +36,31 @@ class BookController extends Controller
      */
     public function index()
     {
-        //pulling all the slots of the user from the database and storing it in a variable
-        $slots = Slot::all();
 
-        //passing all the slots in $slots object to a view
-        return view('book.index')->with('slots', $slots);
+        //get the user role type from users table, by using the user's email id
+        $user_role = DB::table('users')
+            -> where('email', '=', Auth::user()->email) -> value('role');
+
+        //dd($user_role);
+        //if user_role is admin then he can view all slots else only intended
+        if( strcasecmp($user_role, 'user') == 0)
+        {
+            //the below sql operation ensures only the intended user slots are displayed
+            $slots = DB::table('slots')
+                -> where('email', '=', Auth::user()->email ) -> get();
+            //dd($user_role);
+            //passing all the slots in $slots object to a view
+            return view('book.index')->with('slots', $slots);
+        }
+        elseif( strcasecmp($user_role, 'admin') == 0)
+        {
+            //dd($user_role);
+            $slots = Slot::all();
+
+            //passing all the slots in $slots object to a view
+            return view('book.index')->with('slots', $slots);
+        }
+
     }
 
     /**
@@ -64,7 +86,7 @@ class BookController extends Controller
         //validating the fields
 
         $this -> validate($request, array(
-                'bookedon' => 'required',
+                'bookedon' => 'required|after:today',
                 'bookedfrom' => 'required',
         ));
         //dd($request);
@@ -72,17 +94,33 @@ class BookController extends Controller
         $slot = new Slot(); //an instance to the model "Book"
         $auth = new Auth();
 
-        $slot->email = Auth::user()->email;
-        $slot->bookedon = $request->bookedon;
-        $slot->bookedfrom = $request->bookedfrom;
+        //to eliminate the possibility to book slot on same day same time
+        $toEliminateCollision = DB::table('slots')
+                                    -> where([
+                                        ['bookedfrom', '=', $request->bookedfrom],
+                                        ['bookedon', '=', $request->bookedon],
+                                    ])->count();
 
-        $time = strtotime($slot->bookedfrom);
-        $slot->bookedtill = date('H:i', strtotime('+20 minutes', $time));//   strtotime('+20 minute', strtotime($slot->bookedfrom));  //($request->bookedfrom)->date_modify('+20 minutes');
+        //dd($request->bookedfrom);
+        //store the values only if the $toEliminateCollisioin is '0'
+        if($toEliminateCollision != 0)
+        {
+            //dd($request->bookedfrom);
+            return view('slotFilled');
+        }else{
+            $slot->email = Auth::user()->email;
+            $slot->bookedon = $request->bookedon;
+            $slot->bookedfrom = $request->bookedfrom;
 
-        $slot->save();
-        Session::flash('success','you have successfully booked your slot');
-        //redirecting to view
-        return redirect()->route('book.show', $slot->id);
+            $time = strtotime($slot->bookedfrom);
+            $slot->bookedtill = date('H:i', strtotime('+20 minutes', $time));
+
+            $slot->save();
+            Session::flash('success','you have successfully booked your slot');
+            //redirecting to view
+            return redirect()->route('book.show', $slot->id);
+        }
+
     }
 
     /**
@@ -123,29 +161,33 @@ class BookController extends Controller
     {
         //validating the fields
         $this -> validate($request, array(
-            'bookedon' => 'required',
+            'bookedon' => 'required|after:today',
             'bookedfrom' => 'required',
         ));
         //dd($request);
         //taking the update information from the edit page
         $slot = Slot::find($id);
 
-        //Saving the old timings
-        $old_bookedon = $slot->bookedon;
-        $old_bookedfrom = $slot->bookedfrom;
+        //to eliminate the possibility to book slot on same day same time
+        $toEliminateCollisioin = DB::table('slots')
+            -> where('bookedfrom', '=', $request->bookedfrom)->count();
 
-        //saving new timing to the database
-        $slot->bookedon = $request->input('bookedon');
-        $slot->bookedfrom = $request->input('bookedfrom');
-        $time = strtotime($slot->bookedfrom);
-        //$slot->bookedtill = strtotime($slot->bookedfrom) + 1200;
-        $slot->bookedtill = date("h:i", strtotime('+20 minutes' , $time));   //add(new \DateInterval('PT20M'));
-        //dd();
-        //commiting changes to database
-        $slot->save();
+        if($toEliminateCollisioin != 0)
+        {
+            return view('slotFilled');
+        }else{
+            //saving new timing to the database
+            $slot->bookedon = $request->input('bookedon');
+            $slot->bookedfrom = $request->input('bookedfrom');
+            $time = strtotime($slot->bookedfrom);
+            $slot->bookedtill = date("h:i", strtotime('+20 minutes' , $time));   //add(new \DateInterval('PT20M'));
 
-        //displaying the updated information in show page
-        return redirect()->route('book.show', $slot->id);
+            //commiting changes to database
+            $slot->save();
+
+            //displaying the updated information in show page
+            return redirect()->route('book.show', $slot->id);
+        }
     }
 
     /**
