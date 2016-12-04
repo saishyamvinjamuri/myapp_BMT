@@ -75,7 +75,7 @@ class LoginController extends Controller
         }
         else
         {
-            return redirect('admin/login');
+            return redirect('date/login');
         }
 
     }

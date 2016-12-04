@@ -42,7 +42,7 @@ class BookController extends Controller
             -> where('email', '=', Auth::user()->email) -> value('role');
 
         //dd($user_role);
-        //if user_role is admin then he can view all slots else only intended
+        //if user_role is date then he can view all slots else only intended
         if( strcasecmp($user_role, 'user') == 0)
         {
             //the below sql operation ensures only the intended user slots are displayed

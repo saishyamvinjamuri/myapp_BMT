@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -11,7 +10,7 @@
 
                         {!! Form::open(array('route' => 'book.store')) !!}
                             {{ Form::label('bookedon', 'Date :') }}
-                            {{ Form::date('bookedon', 'Select date', array('class' => 'form-control', 'id' => 'book_date')) }}
+                            {{ Form::date('bookedon', 'mm/dd/yyyy', array('class' => 'form-control', 'id' => 'date')) }}
                             <br>
                             {{ Form::label('bookedfrom', 'Time :') }}
                             {{ Form::time('bookedfrom', 'Select time', array('class' => 'form-control', 'id' => 'book_time')) }}
@@ -25,6 +24,16 @@
             </div>
         </div>
     </div>
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function () {
+                $('#date').datetimepicker();
+            });
+        });
     </script>
 @endsection

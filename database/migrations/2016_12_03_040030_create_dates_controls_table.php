@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DisableDatesTable extends Migration
+class CreateDatesControlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,11 @@ class DisableDatesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('dates_controls', function (Blueprint $table) {
+            $table->increments('id');
+            $table -> date('disableOn');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class DisableDatesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('dates_controls');
     }
 }

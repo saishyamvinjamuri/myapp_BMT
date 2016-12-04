@@ -12,7 +12,13 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 
 
     <!-- Scripts -->
@@ -21,7 +27,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 <body>
     <div id="app">
@@ -57,8 +63,9 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
                             @if( Auth::user()->role == 'admin')
-                                <li><a href="{{ url('/book/create') }}">Enable</a></li>
-                                <li><a href="{{ url('/book/create') }}">Disable</a></li>
+                                <li><a href="{{ url('/date/create') }}">Control Dates</a></li>
+                                <li><a href="{{ url('/date/') }}">Show Dates</a></li>
+                                <li><a href="{{ url('/date/') }}">Edit Dates</a></li>
                             @endif
                             <li><a href="{{ url('/book/create') }}">Book</a></li>
                             <li><a href="{{ url('/book') }}">View</a></li> <!--this is redirecting to index page -->
